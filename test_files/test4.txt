@@ -1,0 +1,57 @@
+|*
+ Programma esemplificativo del linguaggio NewLang
+
+ Scrivere un programma NewLang che risolve un’equazione di secondo grado.
+|
+
+float a<<1.23, b, c;
+float x1, x2, d;
+
+def coefficienti(): void {
+    a <-- "Coefficiente a:";
+    b <-- "Coefficiente b:";
+    c <-- "Coefficiente c:";
+}
+
+def determinante(): void {
+    d << (b * b) - 4 * a * c;
+}
+
+def soluzioni(): void {
+    if d < 0 then {
+        ("Non possono esserci soluzioni reali!") -->!;
+    } else {
+        if d = 0 then {
+            x1 << (-b)/(2*a);
+            ("Due soluzioni reali coincidenti x1 e x2 uguali a " & x1) -->!;
+        } else {
+              x1 << ((-b) - sqrt(d))/(2*a);
+              x2 << ((-b) + sqrt(d))/(2*a);
+              ("Due soluzioni reali distinte x1 = " & x1 & " e x2= " & x2) -->!;
+        }
+    }
+}
+
+def equazione_primo(): void {
+    if b = 0 and c = 0 then {
+    ("Equazione indeterminata") -->!;
+    } else {
+        if b = 0 then {
+        ("Equazione impossibile") -->!;
+        } else {
+            x1 << (-c)/b;
+            ("x1= " & x1) -->!;
+        }
+    }
+}
+
+start:
+def mainFunction(): void {
+    coefficienti();
+    if a = 0 then {
+        equazione_primo();
+    } else {
+        determinante();
+        soluzioni();
+    }
+}

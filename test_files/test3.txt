@@ -1,0 +1,95 @@
+|*
+    Scrivere un programma NewLang che:
+    - Visualizzi un menu in cui un utente può scegliere l' operazione aritmetica da svolgere;
+    - Richieda all'utente gli input (interi o double) necessari per svolgere l'operazione scelta;
+    - Esegua l'operazione, restituisca il risultato e chieda se si vuol continuare
+    - All'input 0 oppure 1 il programma  conclude oppure mostra il menu iniziale, rispettivamente.
+    - N.B. si utilizzino almeno due funzioni. In generale, si cerchi di utilizzare tutte le caratteristiche del linguaggio.
+|
+
+float a, b;
+integer scelta;
+
+def menu(): void {
+    ("******* Menu *******") -->!;
+	("1) Somma") -->!;
+	("2) Sottrazione") -->!;
+	("3) Moltiplicazione") -->!;
+	("4) Divisione") -->!;
+	("5) Potenza") -->!;
+
+	scelta <-- "Inserisci Operazione:";
+
+	while scelta < 1 or scelta > 5 loop
+	{
+		 scelta <-- "Operazione non valida!, Inserisci Operazione:";
+	}
+}
+
+
+def effettuaOperazione(): float {
+	float a, b, risultato;
+
+    a <-- "Inserisci primo operando:";
+    b <-- "Inserisci secondo operando:";
+
+	if scelta = 1 then
+	{
+		risultato << a+b;
+	} else {
+		if scelta = 2 then
+		{
+			risultato << a-b;
+		} else {
+			if scelta = 3 then
+			{
+				risultato << a*b;
+			} else {
+				if scelta = 4 then
+				{
+					risultato << a/b;
+				} else {
+					if scelta = 5 then
+					{
+						risultato << a^b;
+					}
+				}
+			}
+		}
+	}
+	return risultato;
+}
+
+def continua(): boolean {
+	integer a,b, scelta;
+	boolean b;
+
+	scelta <-- "inserisci 1 per effettuare un'altra operazione, 0 per terminare:";
+
+	if scelta = 1 then
+	{
+		b << true;
+	} else {
+		if scelta = 0 then
+		{
+			b << false;
+		}
+	}
+	return b;
+}
+
+|| Funzione Main
+
+start:
+def esempio(): void {
+	boolean z << true;
+	float risultato;
+
+	while z = true loop
+	{
+		menu();
+		risultato << effettuaOperazione();
+        ("Il risultato dell'operazione scelta è :" & risultato) -->!;
+		b << continua();
+	}
+}

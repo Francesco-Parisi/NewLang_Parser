@@ -1,0 +1,17 @@
+|*
+    Scrivere un programma NewLang che che stampa le tabelline
+|
+
+
+start:
+def mainFunction(): void {
+    integer i,j;
+    int ris;
+
+    for i==1 to 10 loop {
+        for j==1 to 10 loop {
+            ris << i*j;
+            (& ris) -->!;
+        }
+    }
+}
