@@ -90,6 +90,6 @@ def esempio(): void {
 		menu();
 		risultato << effettuaOperazione();
         ("Il risultato dell'operazione scelta è :" & risultato) -->!;
-		b << continua();
+		z << continua();
 	}
 }
