@@ -4,21 +4,23 @@
 |
 
 start:
-    def mainFunction(): void {
-        integer numero;
-        integer fattoriale << 1;
+def mainFunction(): void {
+    integer numero;
+    integer fattoriale << 1;
 
-        numero <-- "Inserisci un numero positivo:";
+    numero <-- "Inserisci un numero positivo:";
 
-        ||  Calcolo del fattoriale
+    ||  Calcolo del fattoriale
 
-        if numero > 0 then {
-            integer i << 1;
-            while i < numero loop {
-                fattoriale << fattoriale * i;
-                i << i + 1;
-            }
+    if numero > 0 then {
+        integer i << 1;
+        while i < numero loop {
+            fattoriale << fattoriale * i;
+            i << i + 1;
+        }
         ("Il Fattoriale è " & fattoriale) -->!;
     }
+
+
 
 }

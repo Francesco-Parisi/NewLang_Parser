@@ -9,10 +9,14 @@ public class ReadStatOp extends Statement {
     private Expr expr;
 
     public ReadStatOp(ArrayList<Id> idList) {
+        if(idList.isEmpty())
+            throw new RuntimeException("Deve essere presente idList!");
         this.idList = idList;
     }
 
     public ReadStatOp(ArrayList<Id> idList, Expr expr) {
+        if(idList.isEmpty())
+            throw new RuntimeException("Deve essere presente idList!");
         this.idList = idList;
         this.expr = expr;
     }

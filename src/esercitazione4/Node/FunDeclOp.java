@@ -1,5 +1,6 @@
 package esercitazione4.Node;
 import esercitazione4.Expressions.Id;
+import esercitazione4.Type.Type;
 import esercitazione4.Visitor.Visitor;
 
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ public class FunDeclOp {
     private BodyOp body;
 
     public FunDeclOp(boolean main, Id id, ArrayList<ParDeclOp> pdList, TypeOp type, BodyOp body) {
+        if(!checkTypeOp(type))
+            throw new RuntimeException("Il TypeOp inserito non ha un tipo valido.");
+
         this.main=main;
         this.id = id;
         this.pdList=pdList;
@@ -19,6 +23,9 @@ public class FunDeclOp {
         this.body = body;
     }
     public FunDeclOp(Id id, ArrayList<ParDeclOp> pdList, TypeOp type, BodyOp body) {
+        if(!checkTypeOp(type))
+            throw new RuntimeException("Il TypeOp inserito non ha un tipo valido.");
+
         this.main=false;
         this.id = id;
         this.pdList=pdList;
@@ -27,6 +34,9 @@ public class FunDeclOp {
     }
 
     public FunDeclOp(Id id, TypeOp type, BodyOp body) {
+        if(!checkTypeOp(type))
+            throw new RuntimeException("Il TypeOp inserito non ha un tipo valido.");
+
         this.id = id;
         this.pdList=null;
         this.type = type;
@@ -64,5 +74,10 @@ public class FunDeclOp {
     public String toString() {return super.toString();}
     public Object accept(Visitor v){
         return v.visit(this);
+    }
+
+    private boolean checkTypeOp(TypeOp typeOp) {
+        String type = typeOp.getType();
+        return Type.basicTypes.contains(type) || type.equals(Type.VOID);
     }
 }

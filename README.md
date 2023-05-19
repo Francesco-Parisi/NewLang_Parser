@@ -1,17 +1,5 @@
-# NewLang Programming Language
+## NewLang Programming Language
 
-Esercitazione 4 del Corso Compilatori dell'Università degli studi di Salerno.
-
-## Analisi lessicale e sintattica di NewLang
-
-Date le specifiche lessicali e sintattiche del linguaggio NewLang:
-
-1. Scrivere un programma NewLang che visualizzi un menu in cui un utente può scegliere l' operazione aritmetica da svolgere richieda all'utente gli input (interi o double) necessari per svolgere l'operazione scelta esegua l'operazione, restituisca il risultato e chieda se si vuol continuare all'input 0 oppure 1 il programma conclude oppure mostra il menu iniziale, rispettivamente.
-N.B. si utilizzino almeno due funzioni. In generale, si cerchi di utilizzare tutte le caratteristiche del linguaggio.
-
-2. Allo scopo di poter verificare la correttezza e compilare il programma appena scritto, si costruisca un parser completo di lexer e parser per NewLang tramite Jflex e CUP. L'analizzatore sintattico può interrompersi al primo errore sintattico incontrato.
-
-3. Utilizzare la grammatica implementata al punto 2 per costruire gli alberi sintattici secondo la specifica stabilita.
 
 ### Lexical Specification
 
@@ -20,7 +8,7 @@ N.B. si utilizzino almeno due funzioni. In generale, si cerchi di utilizzare tut
 | MAIN          | "start:"                 |
 | SEMI          | ";"                      |
 | COMMA         | ","                      |
-| PIPE          | "&#124;"                 |                 
+| PIPE          | "&#124;"                 |                  |
 | VAR           | "var"                    |
 | INT           | "integer"                |
 | REAL          | "float"                  |
@@ -85,10 +73,10 @@ IdInitList ::= ID
 	| ID ASSIGN Expr
 	| IdInitList COMMA ID ASSIGN Expr;
 
-IdInitObblList ::= ID ASSIGN Const
-	| IdInitObblList COMMA ID ASSIGN Const;
+IdInitObblList ::= ID ASSIGN esercitazione4.Const
+	| IdInitObblList COMMA ID ASSIGN esercitazione4.Const;
 
-Const ::= INTEGER_CONST | REAL_CONST | TRUE | FALSE | STRING_CONST | CHAR_CONST;
+esercitazione4.Const ::= INTEGER_CONST | REAL_CONST | TRUE | FALSE | STRING_CONST | CHAR_CONST;
 
 FunDecl ::= DEF ID LPAR ParamDeclList RPAR COLON TypeOrVoid Body;
 

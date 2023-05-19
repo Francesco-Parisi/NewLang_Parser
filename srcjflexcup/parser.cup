@@ -5,6 +5,8 @@ import esercitazione4.Expressions.*;
 import esercitazione4.Expressions.BinaryOp.*;
 import esercitazione4.Expressions.UnaryOp.*;
 import esercitazione4.Statement.*;
+import esercitazione4.Type.*;
+import esercitazione4.Const.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -91,14 +93,14 @@ VarDecl ::= Type:type IdInitList:idList SEMI {:
         RESULT= new VarDeclOp(type,idList);
     :}
     | VAR IdInitObblList:obbList SEMI{:
-        RESULT= new VarDeclOp(new TypeOp("var"),obbList);
+        RESULT= new VarDeclOp(new TypeOp(Type.VAR),obbList);
     :};
 
-Type ::= INT {:RESULT=new TypeOp("integer");:}
-    | BOOL {:RESULT=new TypeOp("bool");:}
-    | REAL {:RESULT=new TypeOp("real");:}
-    | STRING {:RESULT=new TypeOp("string");:}
-    | CHAR {:RESULT=new TypeOp("char");:};
+Type ::= INT {:RESULT=new TypeOp(Type.INT);:}
+    | BOOL {:RESULT=new TypeOp(Type.BOOL);:}
+    | REAL {:RESULT=new TypeOp(Type.REAL);:}
+    | STRING {:RESULT=new TypeOp(Type.STRING);:}
+    | CHAR {:RESULT=new TypeOp(Type.CHAR);:};
 
 IdInitList ::= ID:id {:
         ArrayList<IdExpr> idExprList= new ArrayList<>();
@@ -129,12 +131,12 @@ IdInitObblList ::= ID:id ASSIGN Const:cons{:
           RESULT= idExprList;
     :};
 
-Const ::= INTEGER_CONST:lessema {:RESULT=new ConstOp("IntegerConst: ", lessema);:}
-        | REAL_CONST:lessema {:RESULT=new ConstOp("RealConst: ", lessema);:}
-        | TRUE {:RESULT=new ConstOp("TrueConst");:}
-        | FALSE {:RESULT=new ConstOp("FalseConst");:}
-        | STRING_CONST:lessema {:RESULT=new ConstOp("StringConst: ", lessema);:}
-        | CHAR_CONST:lessema {:RESULT=new ConstOp("CharConst: ", lessema);
+Const ::= INTEGER_CONST:lessema {:RESULT=new ConstOp(Const.INTEGER_CONST+": ", lessema);:}
+        | REAL_CONST:lessema {:RESULT=new ConstOp(Const.REAL_CONST+": ", lessema);:}
+        | TRUE {:RESULT=new ConstOp(Const.TRUE_CONST);:}
+        | FALSE {:RESULT=new ConstOp(Const.FALSE_CONST);:}
+        | STRING_CONST:lessema {:RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);:}
+        | CHAR_CONST:lessema {:RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);
     :};
 
 FunDecl ::= DEF ID:id LPAR ParamDeclList:paramDecList RPAR COLON TypeOrVoid:type Body:body{:
@@ -165,14 +167,14 @@ NonEmptyParamDeclList ::= ParDecl:parDecl {:
     :};
 
 ParDecl ::= Type:type IdList:idList {:
-            RESULT= new ParDeclOp(type,idList);
+            RESULT= new ParDeclOp(false,type,idList);
     :}
     | OUT Type:type IdList:idList{:
-            RESULT= new ParDeclOp(new TypeOp("out"),type,idList);
+            RESULT= new ParDeclOp(true,type,idList);
     :};
 
 TypeOrVoid ::= Type:type {: RESULT=type; :}
-    | VOID {:RESULT=new TypeOp("void");:};
+    | VOID {:RESULT=new TypeOp(Type.VOID);:};
 
 VarDeclList ::= /* empty */ {:RESULT = new ArrayList<VarDeclOp>();:}
     | VarDecl:varDecl VarDeclList:varDeclList{:
@@ -226,11 +228,11 @@ WhileStat ::= WHILE Expr:expr LOOP Body:body {:
     :};
 
 ForStat ::= FOR ID:id ASSIGN INTEGER_CONST:cons1 TO INTEGER_CONST:cons2 LOOP Body:body {:
-        RESULT= new ForStatOp(new Id(id), new ConstOp("IntegerConst: ", cons1),new ConstOp("IntegerConst: ", cons2),body);
+        RESULT= new ForStatOp(new Id(id), new ConstOp(Const.INTEGER_CONST+": ", cons1),new ConstOp(Const.INTEGER_CONST+": ", cons2),body);
     :};
 
 ReadStat ::= IdList:idList READ STRING_CONST:lessema {:
-        RESULT= new ReadStatOp(idList,new ConstOp("StringConst: ", lessema));
+        RESULT= new ReadStatOp(idList,new ConstOp(Const.STRING_CONST+": ", lessema));
     :}
 	| IdList:idList READ {:
 	    RESULT= new ReadStatOp(idList);
@@ -276,12 +278,12 @@ ExprList ::= Expr:expr {:
         RESULT= eList;
     :};
 
-Expr ::= TRUE {:RESULT= new ConstOp("TrueConst");:}
-    | FALSE {:RESULT= new ConstOp("FalseConst");:}
-    | INTEGER_CONST:lessema {:RESULT= new ConstOp("IntegerConst: ", lessema);:}
-    | REAL_CONST:lessema {:RESULT= new ConstOp("RealConst: ", lessema);:}
-    | STRING_CONST:lessema {:RESULT= new ConstOp("StringConst: ", lessema);:}
-    | CHAR_CONST:lessema {:RESULT= new ConstOp("CharConst: ", lessema);:}
+Expr ::= TRUE {:RESULT= new ConstOp(Const.TRUE_CONST);:}
+    | FALSE {:RESULT= new ConstOp(Const.FALSE_CONST);:}
+    | INTEGER_CONST:lessema {:RESULT= new ConstOp(Const.INTEGER_CONST+": ", lessema);:}
+    | REAL_CONST:lessema {:RESULT= new ConstOp(Const.REAL_CONST+": ", lessema);:}
+    | STRING_CONST:lessema {:RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);:}
+    | CHAR_CONST:lessema {:RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);:}
     | ID:lessema {:RESULT= new Id(lessema);:}
     | FunCall:funCall {:RESULT= funCall;:}
     | Expr:e1  PLUS Expr:e2 {:RESULT= new AddOp(e1,e2);:}

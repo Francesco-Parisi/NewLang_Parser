@@ -9,6 +9,8 @@ public class WriteStatOp extends Statement{
     private ArrayList<Expr> exprList;
 
     public WriteStatOp(boolean write, ArrayList<Expr> exprList){
+        if(exprList.isEmpty())
+            throw new RuntimeException("Deve essere presente exprList!");
         this.write=write;
         this.exprList=exprList;
     }

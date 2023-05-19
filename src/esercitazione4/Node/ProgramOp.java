@@ -7,6 +7,8 @@ public class ProgramOp {
     private ArrayList<FunDeclOp> funDeclOpList;
 
     public ProgramOp(ArrayList<VarDeclOp> varDeclOpList,ArrayList<FunDeclOp> funDeclOpList) {
+        if(funDeclOpList.isEmpty())
+            throw new RuntimeException("funDeclOpList non può essere vuota!");
         this.varDeclOpList = varDeclOpList;
         this.funDeclOpList = funDeclOpList;
 

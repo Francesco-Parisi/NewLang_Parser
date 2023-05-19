@@ -54,11 +54,11 @@ public class XmlGenerator implements Visitor{
     public Object visit(ParDeclOp parDeclOp) {
         Element parDeclOpElement = document.createElement("ParDeclOp");
 
-        //Append del nodo CurrentType
-        TypeOp out = parDeclOp.getCurrentType();
-        if (out!=null){
-            parDeclOpElement.appendChild((Element) out.accept(this));
-        }
+        //Append del nodo Out
+        Element outElement = document.createElement("Out");
+        String out = Boolean.toString(parDeclOp.getOut());
+        outElement.appendChild(document.createTextNode(out));
+        parDeclOpElement.appendChild(outElement);
 
         //Append del nodo Type
         parDeclOpElement.appendChild((Element) parDeclOp.getType().accept(this));

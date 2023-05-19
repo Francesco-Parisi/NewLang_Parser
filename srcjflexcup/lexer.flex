@@ -6,7 +6,7 @@ import java_cup.runtime.*;
 //Parte 2 - Opzioni e Dichiarazioni
 %public
 %class Lexer
-%cupsym ParserSym
+%cupsym Type
 %cup
 
 %unicode

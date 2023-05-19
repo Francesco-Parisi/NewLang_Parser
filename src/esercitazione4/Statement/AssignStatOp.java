@@ -10,6 +10,10 @@ public class AssignStatOp extends Statement{
     private ArrayList<Expr> exprList;
 
     public AssignStatOp(ArrayList<Id> idList, ArrayList<Expr> exprList) {
+        if(idList.isEmpty())
+            throw new RuntimeException("Deve essere presente idList!");
+        if(exprList.isEmpty())
+            throw new RuntimeException("Deve essere presente exprList!");
         this.idList=idList;
         this.exprList=exprList;
     }
