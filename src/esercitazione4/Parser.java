@@ -10,9 +10,9 @@ import esercitazione4.Node.*;
 import esercitazione4.Expressions.*;
 import esercitazione4.Expressions.BinaryOp.*;
 import esercitazione4.Expressions.UnaryOp.*;
+import esercitazione4.Expressions.ConstOp.*;
 import esercitazione4.Statement.*;
 import esercitazione4.Type.*;
-import esercitazione4.Const.*;
 import java.util.ArrayList;
 import java.util.Stack;
 import java_cup.runtime.XMLElement;
@@ -723,7 +723,7 @@ class CUP$Parser$actions {
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int consleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int consright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		ConstOp cons = (ConstOp)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Const cons = (Const)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
         ArrayList<IdExpr> idExprList= new ArrayList<>();
         idExprList.add(new IdExpr(new Id(id), (Expr) cons));
@@ -745,7 +745,7 @@ class CUP$Parser$actions {
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int consleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int consright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		ConstOp cons = (ConstOp)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Const cons = (Const)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
           idExprList.add(new IdExpr(new Id(id), (Expr) cons));
           RESULT= idExprList;
@@ -757,11 +757,11 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // Const ::= INTEGER_CONST 
             {
-              ConstOp RESULT =null;
+              Const RESULT =null;
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.INTEGER_CONST+": ", lessema);
+		 RESULT = new IntegerOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -769,11 +769,11 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // Const ::= REAL_CONST 
             {
-              ConstOp RESULT =null;
+              Const RESULT =null;
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.REAL_CONST+": ", lessema);
+		 RESULT = new RealOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -781,8 +781,8 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // Const ::= TRUE 
             {
-              ConstOp RESULT =null;
-		RESULT=new ConstOp(Const.TRUE_CONST);
+              Const RESULT =null;
+		 RESULT = new TrueOp(); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -790,8 +790,8 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // Const ::= FALSE 
             {
-              ConstOp RESULT =null;
-		RESULT=new ConstOp(Const.FALSE_CONST);
+              Const RESULT =null;
+		RESULT=new FalseOp();
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -799,11 +799,11 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // Const ::= STRING_CONST 
             {
-              ConstOp RESULT =null;
+              Const RESULT =null;
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);
+		 RESULT = new StringOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -811,11 +811,11 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // Const ::= CHAR_CONST 
             {
-              ConstOp RESULT =null;
+              Const RESULT =null;
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);
+		 RESULT = new CharOp(lessema);
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Const",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1242,7 +1242,7 @@ class CUP$Parser$actions {
 		int bodyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		BodyOp body = (BodyOp)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-        RESULT= new ForStatOp(new Id(id), new ConstOp(Const.INTEGER_CONST+": ", cons1),new ConstOp(Const.INTEGER_CONST+": ", cons2),body);
+        RESULT= new ForStatOp(new Id(id), new IntegerOp(cons1), new IntegerOp(cons2), body);
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ForStat",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1259,7 +1259,7 @@ class CUP$Parser$actions {
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-        RESULT= new ReadStatOp(idList,new ConstOp(Const.STRING_CONST+": ", lessema));
+        RESULT= new ReadStatOp(idList,new StringOp(lessema));
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ReadStat",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1427,7 +1427,7 @@ class CUP$Parser$actions {
           case 65: // Expr ::= TRUE 
             {
               Expr RESULT =null;
-		RESULT= new ConstOp(Const.TRUE_CONST);
+		 RESULT = new TrueOp(); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1436,7 +1436,7 @@ class CUP$Parser$actions {
           case 66: // Expr ::= FALSE 
             {
               Expr RESULT =null;
-		RESULT= new ConstOp(Const.FALSE_CONST);
+		 RESULT = new FalseOp(); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1448,7 +1448,7 @@ class CUP$Parser$actions {
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT= new ConstOp(Const.INTEGER_CONST+": ", lessema);
+		 RESULT = new IntegerOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1460,7 +1460,7 @@ class CUP$Parser$actions {
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT= new ConstOp(Const.REAL_CONST+": ", lessema);
+		 RESULT = new RealOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1472,7 +1472,7 @@ class CUP$Parser$actions {
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);
+		 RESULT = new StringOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1484,7 +1484,7 @@ class CUP$Parser$actions {
 		int lessemaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int lessemaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String lessema = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);
+		 RESULT = new CharOp(lessema); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1508,7 +1508,7 @@ class CUP$Parser$actions {
 		int funCallleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int funCallright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		FunCallOpExpr funCall = (FunCallOpExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT= funCall;
+		RESULT=new FunCallOpExpr(funCall.getId(),funCall.getExprList()); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Expr",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

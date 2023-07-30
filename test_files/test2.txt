@@ -1,26 +1,28 @@
 |*
     Programma esemplificativo del linguaggio NewLang a volte volutamente ridondante.
     Questo programma calcola il fattoriale di un numero.
+
 |
+
+def calcolaFattoriale(integer numero):integer {
+    integer res << 0;
+    if numero = 0 or numero = 1 then {
+        res << 1;
+    } else {
+        res << numero * calcolaFattoriale(numero - 1);
+    }
+    return res;
+}
 
 start:
 def mainFunction(): void {
-    integer numero;
-    integer fattoriale << 1;
+    integer numero, risultato;
+    integer a<<-1, b;
+    float c;
+    string e;
 
-    numero <-- "Inserisci un numero positivo:";
-
-    ||  Calcolo del fattoriale
-
-    if numero > 0 then {
-        integer i << 1;
-        while i < numero loop {
-            fattoriale << fattoriale * i;
-            i << i + 1;
-        }
-        ("Il Fattoriale è " & fattoriale) -->!;
-    }
-
-
+    numero <-- "Inserisci un numero positivo: ";
+    risultato << calcolaFattoriale(numero);
+    ("Il Fattoriale di " & numero & " è " & risultato) -->!;
 
 }

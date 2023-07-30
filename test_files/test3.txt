@@ -5,12 +5,14 @@
     - Esegua l'operazione, restituisca il risultato e chieda se si vuol continuare
     - All'input 0 oppure 1 il programma  conclude oppure mostra il menu iniziale, rispettivamente.
     - N.B. si utilizzino almeno due funzioni. In generale, si cerchi di utilizzare tutte le caratteristiche del linguaggio.
+
 |
 
-float a, b;
+
 integer scelta;
 
 def menu(): void {
+
     ("******* Menu *******") -->!;
 	("1) Somma") -->!;
 	("2) Sottrazione") -->!;
@@ -18,7 +20,7 @@ def menu(): void {
 	("4) Divisione") -->!;
 	("5) Potenza") -->!;
 
-	scelta <-- "Inserisci Operazione:";
+	scelta <-- "Inserisci Operazione: ";
 
 	while scelta < 1 or scelta > 5 loop
 	{
@@ -28,54 +30,55 @@ def menu(): void {
 
 
 def effettuaOperazione(): float {
-	float a, b, risultato;
+    float op1 << 0.0;
+    float op2 << 0.0;
+	float res << 0.0;
 
-    a <-- "Inserisci primo operando:";
-    b <-- "Inserisci secondo operando:";
+    op1 <-- "Inserisci primo operando:";
+    op2 <-- "Inserisci secondo operando:";
 
-	if scelta = 1 then
-	{
-		risultato << a+b;
-	} else {
-		if scelta = 2 then
-		{
-			risultato << a-b;
-		} else {
-			if scelta = 3 then
-			{
-				risultato << a*b;
-			} else {
-				if scelta = 4 then
-				{
-					risultato << a/b;
-				} else {
-					if scelta = 5 then
-					{
-						risultato << a^b;
-					}
-				}
-			}
-		}
+	if scelta = 1 then {
+		res << op1+op2;
 	}
-	return risultato;
+	if scelta = 2 then {
+        res << op1-op2;
+	}
+    if scelta = 3 then {
+		res << op1*op2;
+	}
+	if scelta = 4 then {
+		res << op1/op2;
+	}
+	if scelta = 5 then {
+		res << op1^op2;
+	}
+
+	return res;
 }
 
 def continua(): boolean {
-	integer a,b, scelta;
-	boolean b;
+	integer sel << stampaValore();
+	boolean b1;
 
-	scelta <-- "inserisci 1 per effettuare un'altra operazione, 0 per terminare:";
 
-	if scelta = 1 then
+	if sel = 1 then
 	{
-		b << true;
-	} else {
-		if scelta = 0 then
-		{
-			b << false;
-		}
+		b1 << true;
 	}
-	return b;
+    if sel = 0 then
+    {
+        b1 << false;
+    }
+
+	return b1;
+}
+
+def stampaValore(): integer {
+	integer sel;
+
+	sel <-- "Inserisci 1 per effettuare un'altra operazione, 0 per terminare:";
+    return sel;
+
 }
 
 || Funzione Main
@@ -85,8 +88,7 @@ def esempio(): void {
 	boolean z << true;
 	float risultato;
 
-	while z = true loop
-	{
+	while z loop {
 		menu();
 		risultato << effettuaOperazione();
         ("Il risultato dell'operazione scelta è :" & risultato) -->!;

@@ -1,6 +1,7 @@
 package esercitazione4.Visitor;
 import esercitazione4.Expressions.*;
 import esercitazione4.Expressions.BinaryOp.*;
+import esercitazione4.Expressions.ConstOp.*;
 import esercitazione4.Expressions.UnaryOp.*;
 import esercitazione4.Node.*;
 import esercitazione4.Statement.*;
@@ -13,17 +14,24 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 
-public class XmlGenerator implements Visitor{
+/**
+ * XmlGenerator viene utilizzata per generare un documento XML a partire da un oggetto di tipo ProgramOp.
+ * All'interno della classe, viene creato un oggetto Document utilizzando le classi DocumentBuilderFactory
+ * e DocumentBuilder per creare un nuovo documento XML. Infine, il documento XML completo viene restituito
+ * come risultato della visita.
+ * */
+
+public class XmlGenerator implements Visitor {
     private Document document;
 
     public XmlGenerator () throws ParserConfigurationException {
 
-    // Crea il DocumentBuilderFactory
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
+        // Crea il DocumentBuilderFactory
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
 
-    // Crea un nuovo documento
-    document = builder.newDocument();
+        // Crea un nuovo documento
+        document = builder.newDocument();
     }
 
     @Override
@@ -292,26 +300,70 @@ public class XmlGenerator implements Visitor{
     }
 
     @Override
-    public Object visit(ConstOp constOp) {
-        Element constOpElement = document.createElement("ConstOp");
+    public Object visit(Const Const) {
+        return null;
+    }
 
-        //Append del nodo Type
-        constOpElement.appendChild(document.createTextNode(constOp.getTypeConst().toString()));
 
-        //Append del nodo Lessema
-        String lessema = constOp.getLessema();
-        if(lessema!=null){
-            constOpElement.appendChild(document.createTextNode(constOp.getLessema().toString()));
-        }
-        return constOpElement;
+    @Override
+    public Object visit(TrueOp trueOp) {
+        Element trueOpElement = document.createElement("TrueOp");
+
+        return trueOpElement;
+    }
+
+    @Override
+    public Object visit(FalseOp falseOp) {
+        Element falseOpElement = document.createElement("FalseOp");
+
+        return falseOpElement;
+    }
+
+    @Override
+    public Object visit(IntegerOp integerOp) {
+        Element integerOpElement = document.createElement("IntegerOp");
+
+        //Append del nodo con l'attributo
+        integerOpElement.appendChild(document.createTextNode(integerOp.getAttribute()));
+
+        return integerOpElement;
+    }
+
+    @Override
+    public Object visit(RealOp realOp) {
+        Element realOpOpElement = document.createElement("RealOp");
+
+        //Append del nodo con l'attributo
+        realOpOpElement.appendChild(document.createTextNode(realOp.getAttribute()));
+
+        return realOpOpElement;
+    }
+
+    @Override
+    public Object visit(StringOp stringOp) {
+        Element stringOpElement = document.createElement("StringOp");
+
+        //Append del nodo con l'attributo
+        stringOpElement.appendChild(document.createTextNode(stringOp.getAttribute()));
+
+        return stringOpElement;
+    }
+    @Override
+    public Object visit(CharOp charOp) {
+        Element charOpElement = document.createElement("CharOp");
+
+        //Append del nodo con l'attributo
+        charOpElement.appendChild(document.createTextNode(charOp.getAttribute()));
+
+        return charOpElement;
     }
 
     @Override
     public Object visit(TypeOp typeOp) {
         Element typeOpElement = document.createElement("TypeOp");
 
-        //Append del nodo Type
-        typeOpElement.appendChild(document.createTextNode(typeOp.getType().toString()));
+        //Append del nodo con l'attributo
+        typeOpElement.appendChild(document.createTextNode(typeOp.getType()));
 
         return typeOpElement;
     }
@@ -334,31 +386,34 @@ public class XmlGenerator implements Visitor{
         return funCallOpExprElement;
     }
 
-    @Override
-    public Object visit(IdInitObbOp idInitObbOp) {
-        Element idInitObbOpElement = document.createElement("IdInitObbOp");
+    /**
+     @Override
+     public Object visit(IdInitObbOp idInitObbOp) {
+     Element idInitObbOpElement = document.createElement("IdInitObbOp");
 
-        //Append del nodo Id
-        idInitObbOpElement.appendChild((Element)(idInitObbOp.getId().accept(this)));
+     //Append del nodo Id
+     idInitObbOpElement.appendChild((Element)(idInitObbOp.getId().accept(this)));
 
-        //Append del nodo Expr
-        idInitObbOpElement.appendChild((Element) idInitObbOp.getExpr().accept(this));
+     //Append del nodo Expr
+     idInitObbOpElement.appendChild((Element) idInitObbOp.getExpr().accept(this));
 
-        return idInitObbOpElement;
-    }
+     return idInitObbOpElement;
+     }
 
-    @Override
-    public Object visit(IdInitOp idInitOp) {
-        Element idInitOpElement = document.createElement("IdInitObbOp");
+     @Override
+     public Object visit(IdInitOp idInitOp) {
+     Element idInitOpElement = document.createElement("IdInitObbOp");
 
-        //Append del nodo Id
-        idInitOpElement.appendChild((Element)(idInitOp.getId().accept(this)));
+     //Append del nodo Id
+     idInitOpElement.appendChild((Element)(idInitOp.getId().accept(this)));
 
-        //Append del nodo Expr
-        idInitOpElement.appendChild((Element) idInitOp.getExpr().accept(this));
+     //Append del nodo Expr
+     idInitOpElement.appendChild((Element) idInitOp.getExpr().accept(this));
 
-        return idInitOpElement;
-    }
+     return idInitOpElement;
+     }
+     */
+
     @Override
     public Object visit(Id id) {
 
@@ -371,7 +426,7 @@ public class XmlGenerator implements Visitor{
 
     @Override
     public Object visit(Expr expr) {
-            return null;
+        return null;
     }
     @Override
     public Object visit(AddOp addOp) {
@@ -604,15 +659,15 @@ public class XmlGenerator implements Visitor{
         // creo un nuovo element
         Element idExprListElement = document.createElement("IdExprList");
 
-        // appendo i nodi contenuti nel wrapper IdAndExpr
+        // appendo i nodi contenuti nel wrapper IdExpr
         for(IdExpr idExpr : idExprList) {
-            // creo un idAndExprElement
+            // creo un idExprElement
             Element idExprElement = document.createElement("IdExpr");
 
-            // appendo Id all'elemento idAndExprElement
+            // appendo Id all'elemento idExprElement
             idExprElement.appendChild((Element) idExpr.getId().accept(this));
 
-            //Appendo Expr all'elemento idAndExprElement
+            //Appendo Expr all'elemento idExprElement
             Expr expr = idExpr.getExpr();
             if(expr != null) {
                 idExprElement.appendChild((Element) expr.accept(this));

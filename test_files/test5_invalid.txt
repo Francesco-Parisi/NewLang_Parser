@@ -1,5 +1,9 @@
 |*
     Scrivere un programma NewLang che che stampa le tabelline
+    Errori:
+        Riga 13: errore dichiarazione del tipo int
+        Riga 15 e 16: errore assegnazione i
+        Riga 18: carattere errato, & tra LPAR e RPAR
 |
 
 

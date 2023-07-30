@@ -10,7 +10,6 @@ C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\Bina
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Statement\FunCallOpStat.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\IdInitObbOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\EQOp.java
-C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Const\Const.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\OrOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\StrCatOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\UnaryOp\NotOp.java
@@ -22,7 +21,9 @@ C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\Bina
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\DiffOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\FunDeclOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\IdInitOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\Const.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\FunCallOpExpr.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\IntegerOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\TypeOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\LEOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\MulOp.java
@@ -35,11 +36,15 @@ C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\Bina
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\DeclList.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\IdExpr.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\ProgramOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\RealOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\StringOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\TrueOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\CharOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Type\Type.java
-C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\LTOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\BinaryOp\AndOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\BodyOp.java
+C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Expressions\ConstOp\FalseOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Statement\IfStatOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Statement\WhileStatOp.java
 C:\Users\fpari\IdeaProjects\parisi-rossi_es4\src\esercitazione4\Node\ParDeclOp.java

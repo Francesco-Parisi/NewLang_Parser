@@ -4,9 +4,9 @@ import esercitazione4.Node.*;
 import esercitazione4.Expressions.*;
 import esercitazione4.Expressions.BinaryOp.*;
 import esercitazione4.Expressions.UnaryOp.*;
+import esercitazione4.Expressions.ConstOp.*;
 import esercitazione4.Statement.*;
 import esercitazione4.Type.*;
-import esercitazione4.Const.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -26,7 +26,7 @@ nonterminal FunDeclOp MainFunDecl;
 nonterminal FunDeclOp FunDecl;
 nonterminal ArrayList<IdExpr> IdInitList, IdInitObblList;
 nonterminal Expr Expr;
-nonterminal ConstOp Const;
+nonterminal Const Const;
 nonterminal ArrayList<ParDeclOp> ParamDeclList, NonEmptyParamDeclList;
 nonterminal TypeOp Type;
 nonterminal TypeOp TypeOrVoid;
@@ -131,12 +131,12 @@ IdInitObblList ::= ID:id ASSIGN Const:cons{:
           RESULT= idExprList;
     :};
 
-Const ::= INTEGER_CONST:lessema {:RESULT=new ConstOp(Const.INTEGER_CONST+": ", lessema);:}
-        | REAL_CONST:lessema {:RESULT=new ConstOp(Const.REAL_CONST+": ", lessema);:}
-        | TRUE {:RESULT=new ConstOp(Const.TRUE_CONST);:}
-        | FALSE {:RESULT=new ConstOp(Const.FALSE_CONST);:}
-        | STRING_CONST:lessema {:RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);:}
-        | CHAR_CONST:lessema {:RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);
+Const ::= INTEGER_CONST:lessema {: RESULT = new IntegerOp(lessema); :}
+        | REAL_CONST:lessema {: RESULT = new RealOp(lessema); :}
+        | TRUE {: RESULT = new TrueOp(); :}
+        | FALSE {:RESULT=new FalseOp();:}
+        | STRING_CONST:lessema {: RESULT = new StringOp(lessema); :}
+        | CHAR_CONST:lessema {: RESULT = new CharOp(lessema);
     :};
 
 FunDecl ::= DEF ID:id LPAR ParamDeclList:paramDecList RPAR COLON TypeOrVoid:type Body:body{:
@@ -228,11 +228,11 @@ WhileStat ::= WHILE Expr:expr LOOP Body:body {:
     :};
 
 ForStat ::= FOR ID:id ASSIGN INTEGER_CONST:cons1 TO INTEGER_CONST:cons2 LOOP Body:body {:
-        RESULT= new ForStatOp(new Id(id), new ConstOp(Const.INTEGER_CONST+": ", cons1),new ConstOp(Const.INTEGER_CONST+": ", cons2),body);
+        RESULT= new ForStatOp(new Id(id), new IntegerOp(cons1), new IntegerOp(cons2), body);
     :};
 
 ReadStat ::= IdList:idList READ STRING_CONST:lessema {:
-        RESULT= new ReadStatOp(idList,new ConstOp(Const.STRING_CONST+": ", lessema));
+        RESULT= new ReadStatOp(idList,new StringOp(lessema));
     :}
 	| IdList:idList READ {:
 	    RESULT= new ReadStatOp(idList);
@@ -278,14 +278,14 @@ ExprList ::= Expr:expr {:
         RESULT= eList;
     :};
 
-Expr ::= TRUE {:RESULT= new ConstOp(Const.TRUE_CONST);:}
-    | FALSE {:RESULT= new ConstOp(Const.FALSE_CONST);:}
-    | INTEGER_CONST:lessema {:RESULT= new ConstOp(Const.INTEGER_CONST+": ", lessema);:}
-    | REAL_CONST:lessema {:RESULT= new ConstOp(Const.REAL_CONST+": ", lessema);:}
-    | STRING_CONST:lessema {:RESULT=new ConstOp(Const.STRING_CONST+": ", lessema);:}
-    | CHAR_CONST:lessema {:RESULT=new ConstOp(Const.CHAR_CONST+": ", lessema);:}
+Expr ::= TRUE {: RESULT = new TrueOp(); :}
+    | FALSE {: RESULT = new FalseOp(); :}
+    | INTEGER_CONST:lessema {: RESULT = new IntegerOp(lessema); :}
+    | REAL_CONST:lessema {: RESULT = new RealOp(lessema); :}
+    | STRING_CONST:lessema {: RESULT = new StringOp(lessema); :}
+    | CHAR_CONST:lessema {: RESULT = new CharOp(lessema); :}
     | ID:lessema {:RESULT= new Id(lessema);:}
-    | FunCall:funCall {:RESULT= funCall;:}
+    | FunCall:funCall {:RESULT=new FunCallOpExpr(funCall.getId(),funCall.getExprList()); :}
     | Expr:e1  PLUS Expr:e2 {:RESULT= new AddOp(e1,e2);:}
     | Expr:e1  MINUS Expr:e2 {:RESULT= new DiffOp(e1,e2);:}
     | Expr:e1  TIMES Expr:e2 {:RESULT= new MulOp(e1,e2);:}

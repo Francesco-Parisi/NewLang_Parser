@@ -43,7 +43,7 @@ def esempio() : void {
 	while ans = "si" loop {
 		a <-- "inserisci un intero:";
 	    b <-- "inserisci un reale:";
-		risultato << sommac(a, b, taglia);
+		risultato << sommac(a, c, b, taglia);
 		stampa("la somma di " & a & " e " & b &  " incrementata di " & c & " è " & taglia);
 		stampa(" ed è pari a " & risultato);
 		ans <-- "vuoi continuare? (si/no):\t";

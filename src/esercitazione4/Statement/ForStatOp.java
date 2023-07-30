@@ -1,5 +1,5 @@
 package esercitazione4.Statement;
-import esercitazione4.Expressions.ConstOp;
+import esercitazione4.Expressions.ConstOp.IntegerOp;
 import esercitazione4.Expressions.Id;
 import esercitazione4.Node.BodyOp;
 import esercitazione4.Visitor.Visitor;
@@ -7,10 +7,11 @@ import esercitazione4.Visitor.Visitor;
 public class ForStatOp extends Statement{
 
     private Id id;
-    private ConstOp cons1, cons2;
+    private IntegerOp cons1;
+    private IntegerOp cons2;
     private BodyOp bodyOp;
 
-    public ForStatOp(Id id,ConstOp cons1,ConstOp cons2,BodyOp bodyOp){
+    public ForStatOp(Id id, IntegerOp cons1, IntegerOp cons2, BodyOp bodyOp){
         this.id=id;
         this.cons1=cons1;
         this.cons2=cons2;
@@ -21,14 +22,14 @@ public class ForStatOp extends Statement{
         return id;
     }
     public void setId(Id id) { this.id= id; }
-    public ConstOp getConst1() {
+    public IntegerOp getConst1() {
         return cons1;
     }
-    public void setConst1(ConstOp cons1) { this.cons1=cons1; }
-    public ConstOp getConst2() {
+    public void setConst1(IntegerOp cons1) { this.cons1=cons1; }
+    public IntegerOp getConst2() {
         return cons2;
     }
-    public void setConst(ConstOp cons2) { this.cons2=cons2; }
+    public void setConst(IntegerOp cons2) { this.cons2=cons2; }
     public BodyOp getBodyOp() { return bodyOp; }
     public void setBodyOp(BodyOp bodyOp) { this.bodyOp=bodyOp; }
     public String toString() { return super.toString(); }
